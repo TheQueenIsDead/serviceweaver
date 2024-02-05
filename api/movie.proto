@@ -1,0 +1,29 @@
+syntax = "proto3";
+package api;
+
+option go_package = "github.com/TheQueenIsDead/test-serviceweaver";
+
+import "director.proto";
+
+message Movie {
+  string name = 1;
+  int32 id = 2;
+  Director director = 3;
+}
+
+service MovieService {
+  rpc GetMovieById (GetMovieByIdRequest) returns (GetMovieResponse) {}
+  rpc GetMovieByDirector (GetMovieByDirectorRequest) returns (GetMovieResponse) {}
+}
+
+message GetMovieByIdRequest {
+  int32 id = 1;
+}
+
+message GetMovieByDirectorRequest {
+  int32 id = 1;
+}
+
+message GetMovieResponse {
+  repeated Movie Data = 1;
+}

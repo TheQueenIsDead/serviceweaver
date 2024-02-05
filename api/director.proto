@@ -1,0 +1,21 @@
+syntax = "proto3";
+package api;
+
+option go_package = "github.com/TheQueenIsDead/test-serviceweaver";
+
+message Director {
+  string name = 1;
+  int32 id = 2;
+}
+
+service DirectorService {
+  rpc GetDirectorById (GetDirectorByIdRequest) returns (GetDirectorResponse) {}
+}
+
+message GetDirectorByIdRequest {
+  int32 id = 1;
+}
+
+message GetDirectorResponse {
+  Director Data = 1;
+}
