@@ -32,11 +32,6 @@ func serve(ctx context.Context, app *app) error {
 		if name == "" {
 			name = "World"
 		}
-		//reversed, err := app.reverser.Get().Reverse(ctx, name)
-		//if err != nil {
-		//	http.Error(w, err.Error(), http.StatusInternalServerError)
-		//	return
-		//}
 		fmt.Fprintf(w, "Hello, %s!\n", name)
 	})
 	return http.Serve(app.hello, nil)
