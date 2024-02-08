@@ -6,8 +6,6 @@ import (
 	"github.com/ServiceWeaver/weaver"
 	"log"
 	"net/http"
-	"serviceweaver/internal/director"
-	"serviceweaver/internal/movie"
 )
 
 func main() {
@@ -18,8 +16,8 @@ func main() {
 
 type app struct {
 	weaver.Implements[weaver.Main]
-	director weaver.Ref[director.Component]
-	movie    weaver.Ref[movie.Component]
+	director weaver.Ref[DirectorServerComponent]
+	movie    weaver.Ref[MovieServerComponent]
 	hello    weaver.Listener
 }
 
