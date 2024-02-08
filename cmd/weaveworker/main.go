@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/ServiceWeaver/weaver"
 	"log"
 	"net/http"
-	"test-proto/internal"
-
-	"github.com/ServiceWeaver/weaver"
+	"serviceweaver/internal/director"
+	"serviceweaver/internal/movie"
 )
 
 func main() {
@@ -18,8 +18,8 @@ func main() {
 
 type app struct {
 	weaver.Implements[weaver.Main]
-	director weaver.Ref[internal.DirectorComponent]
-	movie    weaver.Ref[internal.MovieComponent]
+	director weaver.Ref[director.Component]
+	movie    weaver.Ref[movie.Component]
 	hello    weaver.Listener
 }
 

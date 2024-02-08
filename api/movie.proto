@@ -1,7 +1,7 @@
 syntax = "proto3";
 package api;
 
-option go_package = "github.com/TheQueenIsDead/test-serviceweaver";
+option go_package = "serviceweaver/internal/movie";
 
 import "director.proto";
 
