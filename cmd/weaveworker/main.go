@@ -18,8 +18,8 @@ func main() {
 
 type app struct {
 	weaver.Implements[weaver.Main]
-	director weaver.Ref[director.Component]
-	movie    weaver.Ref[movie.Component]
+	director weaver.Ref[director.DirectorServiceServer]
+	movie    weaver.Ref[movie.MovieServiceServer]
 	hello    weaver.Listener
 }
 
