@@ -5,7 +5,7 @@ option go_package = "serviceweaver/internal/gen";
 
 message Director {
   string name = 1;
-  int32 id = 2;
+  string id = 2;
 }
 
 service DirectorService {
@@ -13,7 +13,7 @@ service DirectorService {
 }
 
 message GetDirectorByIdRequest {
-  int32 id = 1;
+  string id = 1;
 }
 
 message GetDirectorResponse {

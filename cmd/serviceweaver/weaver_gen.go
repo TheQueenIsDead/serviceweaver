@@ -16,7 +16,7 @@ func init() {
 		Name:      "github.com/ServiceWeaver/weaver/Main",
 		Iface:     reflect.TypeOf((*weaver.Main)(nil)).Elem(),
 		Impl:      reflect.TypeOf(app{}),
-		Listeners: []string{"hello"},
+		Listeners: []string{"grpc", "http"},
 		LocalStubFn: func(impl any, caller string, tracer trace.Tracer) any {
 			return main_local_stub{impl: impl.(weaver.Main), tracer: tracer}
 		},
@@ -27,7 +27,7 @@ func init() {
 		ReflectStubFn: func(caller func(string, context.Context, []any, []any) error) any {
 			return main_reflect_stub{caller: caller}
 		},
-		RefData: "⟦1c682cd6:wEaVeReDgE:github.com/ServiceWeaver/weaver/Main→serviceweaver/internal/director/DirectorServerInterface⟧\n⟦f43b0489:wEaVeReDgE:github.com/ServiceWeaver/weaver/Main→serviceweaver/internal/movie/MovieServerInterface⟧\n⟦17f36ff9:wEaVeRlIsTeNeRs:github.com/ServiceWeaver/weaver/Main→hello⟧\n",
+		RefData: "⟦1c682cd6:wEaVeReDgE:github.com/ServiceWeaver/weaver/Main→serviceweaver/internal/director/DirectorServerInterface⟧\n⟦f43b0489:wEaVeReDgE:github.com/ServiceWeaver/weaver/Main→serviceweaver/internal/movie/MovieServerInterface⟧\n⟦bb0a6ed6:wEaVeRlIsTeNeRs:github.com/ServiceWeaver/weaver/Main→grpc,http⟧\n",
 	})
 }
 

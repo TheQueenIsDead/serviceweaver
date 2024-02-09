@@ -17,7 +17,9 @@ func (m MovieServerComponent) GetMovieById(context.Context, *gen.GetMovieByIdReq
 	panic("implement me")
 }
 
-func (m MovieServerComponent) GetMovieByDirector(context.Context, *gen.GetMovieByDirectorRequest) (*gen.GetMovieResponse, error) {
+func (m MovieServerComponent) GetMovieByDirector(_ context.Context, request *gen.GetMovieByDirectorRequest) (*gen.GetMovieResponse, error) {
 	//TODO implement me
+
+	//director := request.GetId()
 	panic("implement me")
 }

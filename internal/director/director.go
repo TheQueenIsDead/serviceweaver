@@ -2,6 +2,7 @@ package director
 
 import (
 	"context"
+	"errors"
 	"github.com/ServiceWeaver/weaver"
 	"serviceweaver/internal/gen"
 )
@@ -14,5 +15,15 @@ type DirectorServerComponent struct {
 
 func (d DirectorServerComponent) GetDirectorById(ctx context.Context, request *gen.GetDirectorByIdRequest) (*gen.GetDirectorResponse, error) {
 	//TODO implement me
-	panic("implement me")
+	id := request.GetId()
+
+	if name, ok := DirectorDatabase[string(id)]; ok {
+		return &gen.GetDirectorResponse{
+			Data: &gen.Director{
+				Name: name,
+				Id:   id,
+			},
+		}, nil
+	}
+	return nil, errors.New("could not locate director")
 }

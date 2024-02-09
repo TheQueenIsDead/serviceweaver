@@ -6,7 +6,7 @@ option go_package = "serviceweaver/internal/gen";
 
 message Movie {
   string name = 1;
-  int32 id = 2;
+  string id = 2;
   Director director = 3;
 }
 
@@ -16,11 +16,11 @@ service MovieService {
 }
 
 message GetMovieByIdRequest {
-  int32 id = 1;
+  string id = 1;
 }
 
 message GetMovieByDirectorRequest {
-  int32 id = 1;
+  string id = 1;
 }
 
 message GetMovieResponse {
