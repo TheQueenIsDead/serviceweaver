@@ -1,3 +1,3 @@
-weaver_gen.go
-internal/gen/*
-*.pb.go
+serviceweaver
+!cmd/serviceweaver/
+serviceweaver.exe

@@ -5,23 +5,28 @@ import (
 	"github.com/ServiceWeaver/weaver"
 )
 
-var _ MovieServiceServer = (*Component)(nil)
-
-type Component struct {
-	weaver.Implements[MovieServiceServer]
+type MovieServerInterface interface {
+	GetMovieById(context.Context, *GetMovieByIdRequest) (*GetMovieResponse, error)
+	GetMovieByDirector(context.Context, *GetMovieByDirectorRequest) (*GetMovieResponse, error)
 }
 
-func (m *Component) mustEmbedUnimplementedMovieServiceServer() {
+var _ MovieServerInterface = (*MovieServerComponent)(nil)
+
+type MovieServerComponent struct {
+	weaver.Implements[MovieServerInterface]
+}
+
+func (m MovieServerComponent) GetMovieById(context.Context, *GetMovieByIdRequest) (*GetMovieResponse, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (m *Component) GetMovieById(context.Context, *GetMovieByIdRequest) (*GetMovieResponse, error) {
+func (m MovieServerComponent) GetMovieByDirector(context.Context, *GetMovieByDirectorRequest) (*GetMovieResponse, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (m *Component) GetMovieByDirector(context.Context, *GetMovieByDirectorRequest) (*GetMovieResponse, error) {
-	//TODO implement me
-	panic("implement me")
-}
+//func (m *MovieServerComponent) mustEmbedUnimplementedMovieServiceServer() {
+//	//TODO implement me
+//	panic("implement me")
+//}
