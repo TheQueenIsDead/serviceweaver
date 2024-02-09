@@ -3,13 +3,19 @@ package api;
 
 option go_package = "serviceweaver/internal/gen";
 
+import "google/api/annotations.proto";
+
 message Director {
   string name = 1;
   string id = 2;
 }
 
 service DirectorService {
-  rpc GetDirectorById (GetDirectorByIdRequest) returns (GetDirectorResponse) {}
+  rpc GetDirectorById (GetDirectorByIdRequest) returns (GetDirectorResponse) {
+    option (google.api.http) = {
+      get: "/director/{id}"
+    };
+  }
 }
 
 message GetDirectorByIdRequest {
