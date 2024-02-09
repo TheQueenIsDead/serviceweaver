@@ -2,4 +2,5 @@
 #binary = "./serviceweaver"
 
 [single]
-listeners.http = {address = "localhost:12345"}
+listeners.http = {address = "localhost:8080"}
+listeners.grpc = {address = "localhost:8090"}
