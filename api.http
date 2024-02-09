@@ -1,0 +1,6 @@
+### Request with body
+GRPC grpc://localhost:12345/director.DirectorService/GetDirectorById
+
+{
+  "id": "018d8ce8-d2ef-740f-930b-b0e78fe58350"
+}
