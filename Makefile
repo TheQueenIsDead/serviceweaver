@@ -1,3 +1,5 @@
+default: generate
+
 tools:
 	go install github.com/ServiceWeaver/weaver/cmd/weaver@latest
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
@@ -19,4 +21,7 @@ clean:
 	find . -name weaver_gen.go -exec rm {} \;
 	find . -name *.pb.go -exec rm {} \;
 
-phony: tools
+generate: proto weaver
+
+
+phony: tools proto weaver clean generate default
