@@ -1,0 +1,5 @@
+#[serviceweaver]
+#binary = "./serviceweaver"
+
+[single]
+listeners.http = {address = "localhost:12345"}
