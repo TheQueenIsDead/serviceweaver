@@ -17,7 +17,7 @@ func (d DirectorServerComponent) GetDirectorById(ctx context.Context, request *g
 	//TODO implement me
 	id := request.GetId()
 
-	if name, ok := DirectorDatabase[string(id)]; ok {
+	if name, ok := DirectorDatabase[id]; ok {
 		return &gen.GetDirectorResponse{
 			Data: &gen.Director{
 				Name: name,

@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MovieServiceClient interface {
-	GetMovieById(ctx context.Context, in *GetMovieByIdRequest, opts ...grpc.CallOption) (*GetMovieResponse, error)
+	GetMovieByName(ctx context.Context, in *GetMovieByNameRequest, opts ...grpc.CallOption) (*GetMovieResponse, error)
 	GetMovieByDirector(ctx context.Context, in *GetMovieByDirectorRequest, opts ...grpc.CallOption) (*GetMovieResponse, error)
 }
 
@@ -34,9 +34,9 @@ func NewMovieServiceClient(cc grpc.ClientConnInterface) MovieServiceClient {
 	return &movieServiceClient{cc}
 }
 
-func (c *movieServiceClient) GetMovieById(ctx context.Context, in *GetMovieByIdRequest, opts ...grpc.CallOption) (*GetMovieResponse, error) {
+func (c *movieServiceClient) GetMovieByName(ctx context.Context, in *GetMovieByNameRequest, opts ...grpc.CallOption) (*GetMovieResponse, error) {
 	out := new(GetMovieResponse)
-	err := c.cc.Invoke(ctx, "/api.MovieService/GetMovieById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.MovieService/GetMovieByName", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *movieServiceClient) GetMovieByDirector(ctx context.Context, in *GetMovi
 // All implementations should embed UnimplementedMovieServiceServer
 // for forward compatibility
 type MovieServiceServer interface {
-	GetMovieById(context.Context, *GetMovieByIdRequest) (*GetMovieResponse, error)
+	GetMovieByName(context.Context, *GetMovieByNameRequest) (*GetMovieResponse, error)
 	GetMovieByDirector(context.Context, *GetMovieByDirectorRequest) (*GetMovieResponse, error)
 }
 
@@ -64,8 +64,8 @@ type MovieServiceServer interface {
 type UnimplementedMovieServiceServer struct {
 }
 
-func (UnimplementedMovieServiceServer) GetMovieById(context.Context, *GetMovieByIdRequest) (*GetMovieResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMovieById not implemented")
+func (UnimplementedMovieServiceServer) GetMovieByName(context.Context, *GetMovieByNameRequest) (*GetMovieResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMovieByName not implemented")
 }
 func (UnimplementedMovieServiceServer) GetMovieByDirector(context.Context, *GetMovieByDirectorRequest) (*GetMovieResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMovieByDirector not implemented")
@@ -82,20 +82,20 @@ func RegisterMovieServiceServer(s grpc.ServiceRegistrar, srv MovieServiceServer)
 	s.RegisterService(&MovieService_ServiceDesc, srv)
 }
 
-func _MovieService_GetMovieById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMovieByIdRequest)
+func _MovieService_GetMovieByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMovieByNameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MovieServiceServer).GetMovieById(ctx, in)
+		return srv.(MovieServiceServer).GetMovieByName(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.MovieService/GetMovieById",
+		FullMethod: "/api.MovieService/GetMovieByName",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MovieServiceServer).GetMovieById(ctx, req.(*GetMovieByIdRequest))
+		return srv.(MovieServiceServer).GetMovieByName(ctx, req.(*GetMovieByNameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -126,8 +126,8 @@ var MovieService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MovieServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetMovieById",
-			Handler:    _MovieService_GetMovieById_Handler,
+			MethodName: "GetMovieByName",
+			Handler:    _MovieService_GetMovieByName_Handler,
 		},
 		{
 			MethodName: "GetMovieByDirector",

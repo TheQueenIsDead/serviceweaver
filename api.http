@@ -1,6 +1,8 @@
-### Request with body
-GRPC grpc://localhost:12345/director.DirectorService/GetDirectorById
+### Get Director
+GET localhost:8080/director/018d8ce8-d2ef-740f-930b-b0e78fe58350
 
-{
-  "id": "018d8ce8-d2ef-740f-930b-b0e78fe58350"
-}
+### Get Movie By Director
+GET localhost:8080/movie/director/018d8ce8-d2ef-740f-930b-b0e78fe58350
+
+### Get Movie By Director
+GET localhost:8080/movie/Psycho

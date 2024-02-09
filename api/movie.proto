@@ -8,21 +8,24 @@ import "google/api/annotations.proto";
 
 message Movie {
   string name = 1;
-  string id = 2;
   Director director = 3;
 }
 
 service MovieService {
-  rpc GetMovieById (GetMovieByIdRequest) returns (GetMovieResponse) {
+  rpc GetMovieByName (GetMovieByNameRequest) returns (GetMovieResponse) {
     option (google.api.http) = {
-      get: "/movie/{id}"
+      get: "/movie/{name}"
     };
   }
-  rpc GetMovieByDirector (GetMovieByDirectorRequest) returns (GetMovieResponse) {}
+  rpc GetMovieByDirector (GetMovieByDirectorRequest) returns (GetMovieResponse) {
+    option (google.api.http) = {
+      get: "/movie/director/{id}"
+    };
+  }
 }
 
-message GetMovieByIdRequest {
-  string id = 1;
+message GetMovieByNameRequest {
+  string name = 1;
 }
 
 message GetMovieByDirectorRequest {

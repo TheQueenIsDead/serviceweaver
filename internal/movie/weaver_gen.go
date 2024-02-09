@@ -20,10 +20,10 @@ func init() {
 		Iface: reflect.TypeOf((*MovieServerInterface)(nil)).Elem(),
 		Impl:  reflect.TypeOf(MovieServerComponent{}),
 		LocalStubFn: func(impl any, caller string, tracer trace.Tracer) any {
-			return movieServerInterface_local_stub{impl: impl.(MovieServerInterface), tracer: tracer, getMovieByDirectorMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieByDirector", Remote: false}), getMovieByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieById", Remote: false})}
+			return movieServerInterface_local_stub{impl: impl.(MovieServerInterface), tracer: tracer, getMovieByDirectorMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieByDirector", Remote: false}), getMovieByNameMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieByName", Remote: false})}
 		},
 		ClientStubFn: func(stub codegen.Stub, caller string) any {
-			return movieServerInterface_client_stub{stub: stub, getMovieByDirectorMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieByDirector", Remote: true}), getMovieByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieById", Remote: true})}
+			return movieServerInterface_client_stub{stub: stub, getMovieByDirectorMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieByDirector", Remote: true}), getMovieByNameMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "serviceweaver/internal/movie/MovieServerInterface", Method: "GetMovieByName", Remote: true})}
 		},
 		ServerStubFn: func(impl any, addLoad func(uint64, float64)) codegen.Server {
 			return movieServerInterface_server_stub{impl: impl.(MovieServerInterface), addLoad: addLoad}
@@ -47,7 +47,7 @@ type movieServerInterface_local_stub struct {
 	impl                      MovieServerInterface
 	tracer                    trace.Tracer
 	getMovieByDirectorMetrics *codegen.MethodMetrics
-	getMovieByIdMetrics       *codegen.MethodMetrics
+	getMovieByNameMetrics     *codegen.MethodMetrics
 }
 
 // Check that movieServerInterface_local_stub implements the MovieServerInterface interface.
@@ -73,14 +73,14 @@ func (s movieServerInterface_local_stub) GetMovieByDirector(ctx context.Context,
 	return s.impl.GetMovieByDirector(ctx, a0)
 }
 
-func (s movieServerInterface_local_stub) GetMovieById(ctx context.Context, a0 *gen.GetMovieByIdRequest) (r0 *gen.GetMovieResponse, err error) {
+func (s movieServerInterface_local_stub) GetMovieByName(ctx context.Context, a0 *gen.GetMovieByNameRequest) (r0 *gen.GetMovieResponse, err error) {
 	// Update metrics.
-	begin := s.getMovieByIdMetrics.Begin()
-	defer func() { s.getMovieByIdMetrics.End(begin, err != nil, 0, 0) }()
+	begin := s.getMovieByNameMetrics.Begin()
+	defer func() { s.getMovieByNameMetrics.End(begin, err != nil, 0, 0) }()
 	span := trace.SpanFromContext(ctx)
 	if span.SpanContext().IsValid() {
 		// Create a child span for this method.
-		ctx, span = s.tracer.Start(ctx, "movie.MovieServerInterface.GetMovieById", trace.WithSpanKind(trace.SpanKindInternal))
+		ctx, span = s.tracer.Start(ctx, "movie.MovieServerInterface.GetMovieByName", trace.WithSpanKind(trace.SpanKindInternal))
 		defer func() {
 			if err != nil {
 				span.RecordError(err)
@@ -90,7 +90,7 @@ func (s movieServerInterface_local_stub) GetMovieById(ctx context.Context, a0 *g
 		}()
 	}
 
-	return s.impl.GetMovieById(ctx, a0)
+	return s.impl.GetMovieByName(ctx, a0)
 }
 
 // Client stub implementations.
@@ -98,7 +98,7 @@ func (s movieServerInterface_local_stub) GetMovieById(ctx context.Context, a0 *g
 type movieServerInterface_client_stub struct {
 	stub                      codegen.Stub
 	getMovieByDirectorMetrics *codegen.MethodMetrics
-	getMovieByIdMetrics       *codegen.MethodMetrics
+	getMovieByNameMetrics     *codegen.MethodMetrics
 }
 
 // Check that movieServerInterface_client_stub implements the MovieServerInterface interface.
@@ -155,16 +155,16 @@ func (s movieServerInterface_client_stub) GetMovieByDirector(ctx context.Context
 	return
 }
 
-func (s movieServerInterface_client_stub) GetMovieById(ctx context.Context, a0 *gen.GetMovieByIdRequest) (r0 *gen.GetMovieResponse, err error) {
+func (s movieServerInterface_client_stub) GetMovieByName(ctx context.Context, a0 *gen.GetMovieByNameRequest) (r0 *gen.GetMovieResponse, err error) {
 	// Update metrics.
 	var requestBytes, replyBytes int
-	begin := s.getMovieByIdMetrics.Begin()
-	defer func() { s.getMovieByIdMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+	begin := s.getMovieByNameMetrics.Begin()
+	defer func() { s.getMovieByNameMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
 
 	span := trace.SpanFromContext(ctx)
 	if span.SpanContext().IsValid() {
 		// Create a child span for this method.
-		ctx, span = s.stub.Tracer().Start(ctx, "movie.MovieServerInterface.GetMovieById", trace.WithSpanKind(trace.SpanKindClient))
+		ctx, span = s.stub.Tracer().Start(ctx, "movie.MovieServerInterface.GetMovieByName", trace.WithSpanKind(trace.SpanKindClient))
 	}
 
 	defer func() {
@@ -186,7 +186,7 @@ func (s movieServerInterface_client_stub) GetMovieById(ctx context.Context, a0 *
 
 	// Encode arguments.
 	enc := codegen.NewEncoder()
-	serviceweaver_enc_ptr_GetMovieByIdRequest_2d473268(enc, a0)
+	serviceweaver_enc_ptr_GetMovieByNameRequest_18951083(enc, a0)
 	var shardKey uint64
 
 	// Call the remote method.
@@ -244,8 +244,8 @@ func (s movieServerInterface_server_stub) GetStubFn(method string) func(ctx cont
 	switch method {
 	case "GetMovieByDirector":
 		return s.getMovieByDirector
-	case "GetMovieById":
-		return s.getMovieById
+	case "GetMovieByName":
+		return s.getMovieByName
 	default:
 		return nil
 	}
@@ -276,7 +276,7 @@ func (s movieServerInterface_server_stub) getMovieByDirector(ctx context.Context
 	return enc.Data(), nil
 }
 
-func (s movieServerInterface_server_stub) getMovieById(ctx context.Context, args []byte) (res []byte, err error) {
+func (s movieServerInterface_server_stub) getMovieByName(ctx context.Context, args []byte) (res []byte, err error) {
 	// Catch and return any panics detected during encoding/decoding/rpc.
 	defer func() {
 		if err == nil {
@@ -286,13 +286,13 @@ func (s movieServerInterface_server_stub) getMovieById(ctx context.Context, args
 
 	// Decode arguments.
 	dec := codegen.NewDecoder(args)
-	var a0 *gen.GetMovieByIdRequest
-	a0 = serviceweaver_dec_ptr_GetMovieByIdRequest_2d473268(dec)
+	var a0 *gen.GetMovieByNameRequest
+	a0 = serviceweaver_dec_ptr_GetMovieByNameRequest_18951083(dec)
 
 	// TODO(rgrandl): The deferred function above will recover from panics in the
 	// user code: fix this.
 	// Call the local method.
-	r0, appErr := s.impl.GetMovieById(ctx, a0)
+	r0, appErr := s.impl.GetMovieByName(ctx, a0)
 
 	// Encode the results.
 	enc := codegen.NewEncoder()
@@ -315,8 +315,8 @@ func (s movieServerInterface_reflect_stub) GetMovieByDirector(ctx context.Contex
 	return
 }
 
-func (s movieServerInterface_reflect_stub) GetMovieById(ctx context.Context, a0 *gen.GetMovieByIdRequest) (r0 *gen.GetMovieResponse, err error) {
-	err = s.caller("GetMovieById", ctx, []any{a0}, []any{&r0})
+func (s movieServerInterface_reflect_stub) GetMovieByName(ctx context.Context, a0 *gen.GetMovieByNameRequest) (r0 *gen.GetMovieResponse, err error) {
+	err = s.caller("GetMovieByName", ctx, []any{a0}, []any{&r0})
 	return
 }
 
@@ -358,7 +358,7 @@ func serviceweaver_dec_ptr_GetMovieResponse_96b1edc9(dec *codegen.Decoder) *gen.
 	return &res
 }
 
-func serviceweaver_enc_ptr_GetMovieByIdRequest_2d473268(enc *codegen.Encoder, arg *gen.GetMovieByIdRequest) {
+func serviceweaver_enc_ptr_GetMovieByNameRequest_18951083(enc *codegen.Encoder, arg *gen.GetMovieByNameRequest) {
 	if arg == nil {
 		enc.Bool(false)
 	} else {
@@ -367,11 +367,11 @@ func serviceweaver_enc_ptr_GetMovieByIdRequest_2d473268(enc *codegen.Encoder, ar
 	}
 }
 
-func serviceweaver_dec_ptr_GetMovieByIdRequest_2d473268(dec *codegen.Decoder) *gen.GetMovieByIdRequest {
+func serviceweaver_dec_ptr_GetMovieByNameRequest_18951083(dec *codegen.Decoder) *gen.GetMovieByNameRequest {
 	if !dec.Bool() {
 		return nil
 	}
-	var res gen.GetMovieByIdRequest
+	var res gen.GetMovieByNameRequest
 	dec.DecodeProto(&res)
 	return &res
 }
