@@ -11,6 +11,7 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
 	"reflect"
+	"serviceweaver/internal/gen"
 )
 
 func init() {
@@ -52,7 +53,7 @@ type movieServerInterface_local_stub struct {
 // Check that movieServerInterface_local_stub implements the MovieServerInterface interface.
 var _ MovieServerInterface = (*movieServerInterface_local_stub)(nil)
 
-func (s movieServerInterface_local_stub) GetMovieByDirector(ctx context.Context, a0 *GetMovieByDirectorRequest) (r0 *GetMovieResponse, err error) {
+func (s movieServerInterface_local_stub) GetMovieByDirector(ctx context.Context, a0 *gen.GetMovieByDirectorRequest) (r0 *gen.GetMovieResponse, err error) {
 	// Update metrics.
 	begin := s.getMovieByDirectorMetrics.Begin()
 	defer func() { s.getMovieByDirectorMetrics.End(begin, err != nil, 0, 0) }()
@@ -72,7 +73,7 @@ func (s movieServerInterface_local_stub) GetMovieByDirector(ctx context.Context,
 	return s.impl.GetMovieByDirector(ctx, a0)
 }
 
-func (s movieServerInterface_local_stub) GetMovieById(ctx context.Context, a0 *GetMovieByIdRequest) (r0 *GetMovieResponse, err error) {
+func (s movieServerInterface_local_stub) GetMovieById(ctx context.Context, a0 *gen.GetMovieByIdRequest) (r0 *gen.GetMovieResponse, err error) {
 	// Update metrics.
 	begin := s.getMovieByIdMetrics.Begin()
 	defer func() { s.getMovieByIdMetrics.End(begin, err != nil, 0, 0) }()
@@ -103,7 +104,7 @@ type movieServerInterface_client_stub struct {
 // Check that movieServerInterface_client_stub implements the MovieServerInterface interface.
 var _ MovieServerInterface = (*movieServerInterface_client_stub)(nil)
 
-func (s movieServerInterface_client_stub) GetMovieByDirector(ctx context.Context, a0 *GetMovieByDirectorRequest) (r0 *GetMovieResponse, err error) {
+func (s movieServerInterface_client_stub) GetMovieByDirector(ctx context.Context, a0 *gen.GetMovieByDirectorRequest) (r0 *gen.GetMovieResponse, err error) {
 	// Update metrics.
 	var requestBytes, replyBytes int
 	begin := s.getMovieByDirectorMetrics.Begin()
@@ -134,7 +135,7 @@ func (s movieServerInterface_client_stub) GetMovieByDirector(ctx context.Context
 
 	// Encode arguments.
 	enc := codegen.NewEncoder()
-	serviceweaver_enc_ptr_GetMovieByDirectorRequest_72d179f2(enc, a0)
+	serviceweaver_enc_ptr_GetMovieByDirectorRequest_69c9273b(enc, a0)
 	var shardKey uint64
 
 	// Call the remote method.
@@ -149,12 +150,12 @@ func (s movieServerInterface_client_stub) GetMovieByDirector(ctx context.Context
 
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
-	r0 = serviceweaver_dec_ptr_GetMovieResponse_9f0c9523(dec)
+	r0 = serviceweaver_dec_ptr_GetMovieResponse_96b1edc9(dec)
 	err = dec.Error()
 	return
 }
 
-func (s movieServerInterface_client_stub) GetMovieById(ctx context.Context, a0 *GetMovieByIdRequest) (r0 *GetMovieResponse, err error) {
+func (s movieServerInterface_client_stub) GetMovieById(ctx context.Context, a0 *gen.GetMovieByIdRequest) (r0 *gen.GetMovieResponse, err error) {
 	// Update metrics.
 	var requestBytes, replyBytes int
 	begin := s.getMovieByIdMetrics.Begin()
@@ -185,7 +186,7 @@ func (s movieServerInterface_client_stub) GetMovieById(ctx context.Context, a0 *
 
 	// Encode arguments.
 	enc := codegen.NewEncoder()
-	serviceweaver_enc_ptr_GetMovieByIdRequest_07781373(enc, a0)
+	serviceweaver_enc_ptr_GetMovieByIdRequest_2d473268(enc, a0)
 	var shardKey uint64
 
 	// Call the remote method.
@@ -200,7 +201,7 @@ func (s movieServerInterface_client_stub) GetMovieById(ctx context.Context, a0 *
 
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
-	r0 = serviceweaver_dec_ptr_GetMovieResponse_9f0c9523(dec)
+	r0 = serviceweaver_dec_ptr_GetMovieResponse_96b1edc9(dec)
 	err = dec.Error()
 	return
 }
@@ -260,8 +261,8 @@ func (s movieServerInterface_server_stub) getMovieByDirector(ctx context.Context
 
 	// Decode arguments.
 	dec := codegen.NewDecoder(args)
-	var a0 *GetMovieByDirectorRequest
-	a0 = serviceweaver_dec_ptr_GetMovieByDirectorRequest_72d179f2(dec)
+	var a0 *gen.GetMovieByDirectorRequest
+	a0 = serviceweaver_dec_ptr_GetMovieByDirectorRequest_69c9273b(dec)
 
 	// TODO(rgrandl): The deferred function above will recover from panics in the
 	// user code: fix this.
@@ -270,7 +271,7 @@ func (s movieServerInterface_server_stub) getMovieByDirector(ctx context.Context
 
 	// Encode the results.
 	enc := codegen.NewEncoder()
-	serviceweaver_enc_ptr_GetMovieResponse_9f0c9523(enc, r0)
+	serviceweaver_enc_ptr_GetMovieResponse_96b1edc9(enc, r0)
 	enc.Error(appErr)
 	return enc.Data(), nil
 }
@@ -285,8 +286,8 @@ func (s movieServerInterface_server_stub) getMovieById(ctx context.Context, args
 
 	// Decode arguments.
 	dec := codegen.NewDecoder(args)
-	var a0 *GetMovieByIdRequest
-	a0 = serviceweaver_dec_ptr_GetMovieByIdRequest_07781373(dec)
+	var a0 *gen.GetMovieByIdRequest
+	a0 = serviceweaver_dec_ptr_GetMovieByIdRequest_2d473268(dec)
 
 	// TODO(rgrandl): The deferred function above will recover from panics in the
 	// user code: fix this.
@@ -295,7 +296,7 @@ func (s movieServerInterface_server_stub) getMovieById(ctx context.Context, args
 
 	// Encode the results.
 	enc := codegen.NewEncoder()
-	serviceweaver_enc_ptr_GetMovieResponse_9f0c9523(enc, r0)
+	serviceweaver_enc_ptr_GetMovieResponse_96b1edc9(enc, r0)
 	enc.Error(appErr)
 	return enc.Data(), nil
 }
@@ -309,19 +310,19 @@ type movieServerInterface_reflect_stub struct {
 // Check that movieServerInterface_reflect_stub implements the MovieServerInterface interface.
 var _ MovieServerInterface = (*movieServerInterface_reflect_stub)(nil)
 
-func (s movieServerInterface_reflect_stub) GetMovieByDirector(ctx context.Context, a0 *GetMovieByDirectorRequest) (r0 *GetMovieResponse, err error) {
+func (s movieServerInterface_reflect_stub) GetMovieByDirector(ctx context.Context, a0 *gen.GetMovieByDirectorRequest) (r0 *gen.GetMovieResponse, err error) {
 	err = s.caller("GetMovieByDirector", ctx, []any{a0}, []any{&r0})
 	return
 }
 
-func (s movieServerInterface_reflect_stub) GetMovieById(ctx context.Context, a0 *GetMovieByIdRequest) (r0 *GetMovieResponse, err error) {
+func (s movieServerInterface_reflect_stub) GetMovieById(ctx context.Context, a0 *gen.GetMovieByIdRequest) (r0 *gen.GetMovieResponse, err error) {
 	err = s.caller("GetMovieById", ctx, []any{a0}, []any{&r0})
 	return
 }
 
 // Encoding/decoding implementations.
 
-func serviceweaver_enc_ptr_GetMovieByDirectorRequest_72d179f2(enc *codegen.Encoder, arg *GetMovieByDirectorRequest) {
+func serviceweaver_enc_ptr_GetMovieByDirectorRequest_69c9273b(enc *codegen.Encoder, arg *gen.GetMovieByDirectorRequest) {
 	if arg == nil {
 		enc.Bool(false)
 	} else {
@@ -330,16 +331,16 @@ func serviceweaver_enc_ptr_GetMovieByDirectorRequest_72d179f2(enc *codegen.Encod
 	}
 }
 
-func serviceweaver_dec_ptr_GetMovieByDirectorRequest_72d179f2(dec *codegen.Decoder) *GetMovieByDirectorRequest {
+func serviceweaver_dec_ptr_GetMovieByDirectorRequest_69c9273b(dec *codegen.Decoder) *gen.GetMovieByDirectorRequest {
 	if !dec.Bool() {
 		return nil
 	}
-	var res GetMovieByDirectorRequest
+	var res gen.GetMovieByDirectorRequest
 	dec.DecodeProto(&res)
 	return &res
 }
 
-func serviceweaver_enc_ptr_GetMovieResponse_9f0c9523(enc *codegen.Encoder, arg *GetMovieResponse) {
+func serviceweaver_enc_ptr_GetMovieResponse_96b1edc9(enc *codegen.Encoder, arg *gen.GetMovieResponse) {
 	if arg == nil {
 		enc.Bool(false)
 	} else {
@@ -348,16 +349,16 @@ func serviceweaver_enc_ptr_GetMovieResponse_9f0c9523(enc *codegen.Encoder, arg *
 	}
 }
 
-func serviceweaver_dec_ptr_GetMovieResponse_9f0c9523(dec *codegen.Decoder) *GetMovieResponse {
+func serviceweaver_dec_ptr_GetMovieResponse_96b1edc9(dec *codegen.Decoder) *gen.GetMovieResponse {
 	if !dec.Bool() {
 		return nil
 	}
-	var res GetMovieResponse
+	var res gen.GetMovieResponse
 	dec.DecodeProto(&res)
 	return &res
 }
 
-func serviceweaver_enc_ptr_GetMovieByIdRequest_07781373(enc *codegen.Encoder, arg *GetMovieByIdRequest) {
+func serviceweaver_enc_ptr_GetMovieByIdRequest_2d473268(enc *codegen.Encoder, arg *gen.GetMovieByIdRequest) {
 	if arg == nil {
 		enc.Bool(false)
 	} else {
@@ -366,11 +367,11 @@ func serviceweaver_enc_ptr_GetMovieByIdRequest_07781373(enc *codegen.Encoder, ar
 	}
 }
 
-func serviceweaver_dec_ptr_GetMovieByIdRequest_07781373(dec *codegen.Decoder) *GetMovieByIdRequest {
+func serviceweaver_dec_ptr_GetMovieByIdRequest_2d473268(dec *codegen.Decoder) *gen.GetMovieByIdRequest {
 	if !dec.Bool() {
 		return nil
 	}
-	var res GetMovieByIdRequest
+	var res gen.GetMovieByIdRequest
 	dec.DecodeProto(&res)
 	return &res
 }

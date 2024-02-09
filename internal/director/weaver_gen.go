@@ -11,6 +11,7 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
 	"reflect"
+	"serviceweaver/internal/gen"
 )
 
 func init() {
@@ -51,7 +52,7 @@ type directorServerInterface_local_stub struct {
 // Check that directorServerInterface_local_stub implements the DirectorServerInterface interface.
 var _ DirectorServerInterface = (*directorServerInterface_local_stub)(nil)
 
-func (s directorServerInterface_local_stub) GetDirectorById(ctx context.Context, a0 *GetDirectorByIdRequest) (r0 *GetDirectorResponse, err error) {
+func (s directorServerInterface_local_stub) GetDirectorById(ctx context.Context, a0 *gen.GetDirectorByIdRequest) (r0 *gen.GetDirectorResponse, err error) {
 	// Update metrics.
 	begin := s.getDirectorByIdMetrics.Begin()
 	defer func() { s.getDirectorByIdMetrics.End(begin, err != nil, 0, 0) }()
@@ -81,7 +82,7 @@ type directorServerInterface_client_stub struct {
 // Check that directorServerInterface_client_stub implements the DirectorServerInterface interface.
 var _ DirectorServerInterface = (*directorServerInterface_client_stub)(nil)
 
-func (s directorServerInterface_client_stub) GetDirectorById(ctx context.Context, a0 *GetDirectorByIdRequest) (r0 *GetDirectorResponse, err error) {
+func (s directorServerInterface_client_stub) GetDirectorById(ctx context.Context, a0 *gen.GetDirectorByIdRequest) (r0 *gen.GetDirectorResponse, err error) {
 	// Update metrics.
 	var requestBytes, replyBytes int
 	begin := s.getDirectorByIdMetrics.Begin()
@@ -112,7 +113,7 @@ func (s directorServerInterface_client_stub) GetDirectorById(ctx context.Context
 
 	// Encode arguments.
 	enc := codegen.NewEncoder()
-	serviceweaver_enc_ptr_GetDirectorByIdRequest_e6d178b1(enc, a0)
+	serviceweaver_enc_ptr_GetDirectorByIdRequest_aa43e728(enc, a0)
 	var shardKey uint64
 
 	// Call the remote method.
@@ -127,7 +128,7 @@ func (s directorServerInterface_client_stub) GetDirectorById(ctx context.Context
 
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
-	r0 = serviceweaver_dec_ptr_GetDirectorResponse_4be0fb6c(dec)
+	r0 = serviceweaver_dec_ptr_GetDirectorResponse_9385d16c(dec)
 	err = dec.Error()
 	return
 }
@@ -185,8 +186,8 @@ func (s directorServerInterface_server_stub) getDirectorById(ctx context.Context
 
 	// Decode arguments.
 	dec := codegen.NewDecoder(args)
-	var a0 *GetDirectorByIdRequest
-	a0 = serviceweaver_dec_ptr_GetDirectorByIdRequest_e6d178b1(dec)
+	var a0 *gen.GetDirectorByIdRequest
+	a0 = serviceweaver_dec_ptr_GetDirectorByIdRequest_aa43e728(dec)
 
 	// TODO(rgrandl): The deferred function above will recover from panics in the
 	// user code: fix this.
@@ -195,7 +196,7 @@ func (s directorServerInterface_server_stub) getDirectorById(ctx context.Context
 
 	// Encode the results.
 	enc := codegen.NewEncoder()
-	serviceweaver_enc_ptr_GetDirectorResponse_4be0fb6c(enc, r0)
+	serviceweaver_enc_ptr_GetDirectorResponse_9385d16c(enc, r0)
 	enc.Error(appErr)
 	return enc.Data(), nil
 }
@@ -209,14 +210,14 @@ type directorServerInterface_reflect_stub struct {
 // Check that directorServerInterface_reflect_stub implements the DirectorServerInterface interface.
 var _ DirectorServerInterface = (*directorServerInterface_reflect_stub)(nil)
 
-func (s directorServerInterface_reflect_stub) GetDirectorById(ctx context.Context, a0 *GetDirectorByIdRequest) (r0 *GetDirectorResponse, err error) {
+func (s directorServerInterface_reflect_stub) GetDirectorById(ctx context.Context, a0 *gen.GetDirectorByIdRequest) (r0 *gen.GetDirectorResponse, err error) {
 	err = s.caller("GetDirectorById", ctx, []any{a0}, []any{&r0})
 	return
 }
 
 // Encoding/decoding implementations.
 
-func serviceweaver_enc_ptr_GetDirectorByIdRequest_e6d178b1(enc *codegen.Encoder, arg *GetDirectorByIdRequest) {
+func serviceweaver_enc_ptr_GetDirectorByIdRequest_aa43e728(enc *codegen.Encoder, arg *gen.GetDirectorByIdRequest) {
 	if arg == nil {
 		enc.Bool(false)
 	} else {
@@ -225,16 +226,16 @@ func serviceweaver_enc_ptr_GetDirectorByIdRequest_e6d178b1(enc *codegen.Encoder,
 	}
 }
 
-func serviceweaver_dec_ptr_GetDirectorByIdRequest_e6d178b1(dec *codegen.Decoder) *GetDirectorByIdRequest {
+func serviceweaver_dec_ptr_GetDirectorByIdRequest_aa43e728(dec *codegen.Decoder) *gen.GetDirectorByIdRequest {
 	if !dec.Bool() {
 		return nil
 	}
-	var res GetDirectorByIdRequest
+	var res gen.GetDirectorByIdRequest
 	dec.DecodeProto(&res)
 	return &res
 }
 
-func serviceweaver_enc_ptr_GetDirectorResponse_4be0fb6c(enc *codegen.Encoder, arg *GetDirectorResponse) {
+func serviceweaver_enc_ptr_GetDirectorResponse_9385d16c(enc *codegen.Encoder, arg *gen.GetDirectorResponse) {
 	if arg == nil {
 		enc.Bool(false)
 	} else {
@@ -243,11 +244,11 @@ func serviceweaver_enc_ptr_GetDirectorResponse_4be0fb6c(enc *codegen.Encoder, ar
 	}
 }
 
-func serviceweaver_dec_ptr_GetDirectorResponse_4be0fb6c(dec *codegen.Decoder) *GetDirectorResponse {
+func serviceweaver_dec_ptr_GetDirectorResponse_9385d16c(dec *codegen.Decoder) *gen.GetDirectorResponse {
 	if !dec.Bool() {
 		return nil
 	}
-	var res GetDirectorResponse
+	var res gen.GetDirectorResponse
 	dec.DecodeProto(&res)
 	return &res
 }

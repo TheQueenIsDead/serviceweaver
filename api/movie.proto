@@ -2,7 +2,7 @@ syntax = "proto3";
 import "director.proto";
 package api;
 
-option go_package = "serviceweaver/internal/movie";
+option go_package = "serviceweaver/internal/gen";
 
 message Movie {
   string name = 1;
