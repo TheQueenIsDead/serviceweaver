@@ -4,6 +4,8 @@ package api;
 
 option go_package = "serviceweaver/internal/gen";
 
+import "google/api/annotations.proto";
+
 message Movie {
   string name = 1;
   string id = 2;
@@ -11,7 +13,11 @@ message Movie {
 }
 
 service MovieService {
-  rpc GetMovieById (GetMovieByIdRequest) returns (GetMovieResponse) {}
+  rpc GetMovieById (GetMovieByIdRequest) returns (GetMovieResponse) {
+    option (google.api.http) = {
+      get: "/movie/{id}"
+    };
+  }
   rpc GetMovieByDirector (GetMovieByDirectorRequest) returns (GetMovieResponse) {}
 }
 
